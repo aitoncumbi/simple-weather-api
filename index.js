@@ -1,12 +1,9 @@
-import express from "express";
-import {} from "dotenv/config";
-import cors from "cors";
-
-
-// const cors = require('cors');
+require("dotenv/config");
+const express = require("express");
 const app = express();
 const PORT  = process.env.PORT;
 const API_KEY  = process.env.API_KEY;
+const cors = require("cors");
 
 
 app.get('/test', cors(), (req, res)=>{
