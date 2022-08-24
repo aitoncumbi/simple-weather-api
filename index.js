@@ -63,3 +63,6 @@ app.listen(PORT || 3000, ()=>{
 })
 
 app.use(cors({origin:'*'}))
+
+// Export the Express API
+module.exports = app;
