@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A simple API to test backend connections",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "node ."
   },
