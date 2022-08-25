@@ -10,45 +10,51 @@ const cors = require("cors");
 
 
 app.get('/test', cors(), (req, res)=>{
-    
-    let city = req.query.city;
+  async function citty_grabber(){
 
-      async function citty_grabber(){
-        let response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`);
-        let data = await response.json();
-        data = JSON.stringify(data);
-        data = JSON.parse(data);
-        return data;
+
+    try {
+
+      let city = req.query.city;
+      let response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`);
+      let data = await response.json();
+      data = JSON.stringify(data);
+      data = JSON.parse(data);
+      return data;
+    
+      
+    } catch (error) {
+      console.log(error)
+    }
       } 
+
+    
+
     
 
       async function weather_fetcher(){
-        let headers = await citty_grabber();
-        let lat =  headers[0].lat;
-        let lon =  headers[0].lon;
 
-        let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
-        let data = await response.json();
-        data = JSON.stringify(data);
-        data = JSON.parse(data);
+        try {
 
-        res.send(data)
+          let headers = await citty_grabber();
+          let lat =  headers[0].lat;
+          let lon =  headers[0].lon;
+  
+          let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
+          let data = await response.json();
+          data = JSON.stringify(data);
+          data = JSON.parse(data);
+  
+          res.send(data)
+          
+        } catch (error) {
+          console.log(error)
+          res.send("city cannot be empty")
+        }
+
+
       }
         
-        
-        
-    //   async function main(){
-       
-    //     let headers = await citty_grabber();
-    //     let latitude = await headers[0].lat;
-    //     let longitude = await headers[0].lon;
-    //     console.log("Latitude: ", latitude);
-    //     console.log("Longitude: ", longitude);
-
-
-    //   }
-
-    //   main();
       weather_fetcher();
         
 })
