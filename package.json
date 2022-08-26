@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "node ."
+    "dev": "node ."
   },
   "author": "Aiton Cumbi",
   "license": "MIT",
